@@ -84,3 +84,9 @@ a user creation request.
 @end
 ```
 
+Important Conventions
+=====================
+
+* The server can return a custom error message along with an error code by returning a json
+string in the body: {"errors": "[my message]"}
+* All successful responses are assumed to have JSON bodies
