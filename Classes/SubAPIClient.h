@@ -2,5 +2,5 @@
 
 @interface SubAPIClient : AFHTTPClient
 + (instancetype)sharedClient;
-+ (void)setBaseURL:(NSURL *)aURL
++ (void)setBaseURL:(NSURL *)aURL;
 @end
