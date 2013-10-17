@@ -1,8 +1,8 @@
 #import "AFJSONRequestOperation.h"
-#import "STAPIClient.h"
-#import "STRemoteCommand.h"
+#import "SubAPIClient.h"
+#import "SubCommander.h"
 
-@implementation STRemoteCommand
+@implementation SubCommander
 
 - (NSString *)httpMethod {
     return @"GET";
@@ -70,13 +70,13 @@
     [[self client] enqueueHTTPRequestOperation:operation];
 }
 
-- (STAPIClient *)client
+- (SubAPIClient *)client
 {
-    return [STAPIClient sharedClient];
+    return [SubAPIClient sharedClient];
 }
 
 - (NSString *)parseErrorJson:(id)json {
-    NSString *message = STRemoteCommandGenericErrorMessage;
+    NSString *message = SubGenericErrorMessage;
     if (json && [json objectForKey:@"errors"]) {
         message = [json[@"errors"] componentsJoinedByString:@"; "];
     }

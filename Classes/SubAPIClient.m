@@ -1,12 +1,12 @@
 #import "AFHTTPRequestOperation.h"
-#import "STAPIClient.h"
+#import "SubAPIClient.h"
 
-@implementation STAPIClient
+@implementation SubAPIClient
 
 static NSURL *baseURL;
 
-+ (STAPIClient *)sharedClient {
-    static STAPIClient *sharedClient = nil;
++ (instancetype)sharedClient {
+    static SubAPIClient *sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedClient = [[self alloc] initWithBaseURL:baseURL];

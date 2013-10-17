@@ -1,8 +1,8 @@
 #import "AFNetworking.h"
 
-static NSString *const STRemoteCommandGenericErrorMessage = @"There was a problem processing your request. Please try again.";
+static NSString *const SubGenericErrorMessage = @"There was a problem processing your request. Please try again.";
 
-@interface STRESTCommand : NSObject
+@interface SubCommander : NSObject
 
 - (NSString *)httpMethod;
 - (NSString *)path;

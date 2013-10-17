@@ -1,50 +1,51 @@
-STRESTCommand
+SubCommander
 =============
 
-Provides a simple framework for building REST clients using AFNetworking.
+Framework for building testable clients for JSON REST APIs.
 
 How to install
 =============
-pod install STRESTCommand
+```
+pod install SubCommander
+```
 
 Synopsis
 ========
-Setup the client base URL:
+Setup the API client with your base URL:
 
 ```
-[STAPIClient setBaseURL:[NSURL URLWithString:@"https://boss.substantial.com/api/"]];
+[SubAPIClient setBaseURL:[NSURL URLWithString:@"https://example.com/api/"]];
 ```
 
-Then create your REST commands by inheriting from STRESTCommand and overriding the parts
-you're interested in overriding.  Here's a sample implementation of a command that implements
-a user creation request.
+Then create your commands for each API endpoint by inheriting from SubCommander and overriding the parts
+you're interested in overriding.  Here's a sample implementation of an endpoint for creating users.
 
 ```
-// UserCreationCommand.h
-#import "STRESTCommand.h"
+// RemoteUserCreator.h
+#import "SubCommander.h"
 #import "User.h" // a generic user model not included in this example
 
-@protocol UserCreationCommand
+@protocol RemoteUserCreatorDelegate
 - (void)didCreateUser:(User *)user;
 - (void)didCompleteWithError:(NSString *)errorMessage;
 @end
 
-@interface UserCreationCommand : STRESTCommand
-- (instancetype)initWithDelegate:(id<UserCreationCommandDelegate>)delegate;
+@interface RemoteUserCreator : SubCommander
+- (instancetype)initWithDelegate:(id<RemoteUserCreatorDelegate>)delegate;
 - (void)executeWithUsername:(NSString *)username password:(NSString *)password;
 @end
 
 
-// UserCreationCommand.m
-#import "UserCreationCommand.h"
+// RemoteUserCreator.m
+#import "RemoteUserCreator.h"
 
-@implementation UserCreationCommand {
+@implementation RemoteUserCreator {
     NSString *username;
     NSString *password;
-    __weak id<UserCreationCommandDelegate> delegate;
+    __weak id<RemoteUserCreatorDelegate> delegate;
 }
 
-- (instancetype)initWithDelegate:(id<UserCreationCommandDelegate>)aDelegate
+- (instancetype)initWithDelegate:(id<RemoteUserCreatorDelegate>)aDelegate
 {
     self = [super init];
     if (self) {
@@ -87,6 +88,5 @@ a user creation request.
 Important Conventions
 =====================
 
-* The server can return a custom error message along with an error code by returning a json
-string in the body: {"errors": "[my message]"}
+* The server can return a custom error message along with an error code by returning a json string in the body: {"errors": "[my message]"}
 * All successful responses are assumed to have JSON bodies
