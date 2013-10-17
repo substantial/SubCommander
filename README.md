@@ -1,7 +1,7 @@
 SubCommander
 =============
 
-Framework for building testable clients for JSON REST APIs.
+iOS Objective-C framework for building testable clients for JSON REST APIs.  Uses AFNetworking under the hood.
 
 How to install
 =============

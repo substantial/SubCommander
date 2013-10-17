@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint STRESTCommand.podspec' to ensure this is a
+#  Be sure to run `pod spec lint SubCommander.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -15,15 +15,15 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "STRESTCommand"
+  s.name         = "SubCommander"
   s.version      = "0.0.1"
-  s.summary      = "Objective-C REST Client for AFNetworking"
+  s.summary      = "iOS Objective-C framework for building testable clients for JSON REST APIs"
 
   s.description  = <<-DESC
-                   Provides a simple framework for building REST clients using AFNetworking.
+                   iOS Objective-C framework for building testable clients for JSON REST APIs.  Uses AFNetworking under the hood.
                    DESC
 
-  s.homepage     = "http://github.com/substantial/STRESTCommand"
+  s.homepage     = "http://github.com/substantial/SubCommander"
   # s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
 
 
@@ -70,7 +70,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/substantial/STRESTCommand.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/substantial/SubCommander.git", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
