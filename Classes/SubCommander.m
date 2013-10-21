@@ -78,7 +78,11 @@
 - (NSString *)parseErrorJson:(id)json {
     NSString *message = SubGenericErrorMessage;
     if (json && [json objectForKey:@"errors"]) {
+      if ([json[@"errors"] isKindOfClass:[NSArray class]]) {
         message = [json[@"errors"] componentsJoinedByString:@"; "];
+      } else {
+        message = json[@"errors"];
+      }
     }
 
     return message;
