@@ -21,31 +21,31 @@ Then create your commands for each API endpoint by inheriting from SubCommander 
 you're interested in overriding.  Here's a sample implementation of an endpoint for creating users.
 
 ```
-// RemoteUserCreator.h
+// CreateUserCommand.h
 #import "SubCommander.h"
-#import "User.h" // a generic user model not included in this example
+#import "User.h" // Note: User.h isn't provided in this example
 
-@protocol RemoteUserCreatorDelegate
+@protocol CreateUserCommandDelegate
 - (void)didCreateUser:(User *)user;
 - (void)didCompleteWithError:(NSString *)errorMessage;
 @end
 
-@interface RemoteUserCreator : SubCommander
-- (instancetype)initWithDelegate:(id<RemoteUserCreatorDelegate>)delegate;
+@interface CreateUserCommand : SubCommander
+- (instancetype)initWithDelegate:(id<CreateUserCommandDelegate>)delegate;
 - (void)executeWithUsername:(NSString *)username password:(NSString *)password;
 @end
 
 
-// RemoteUserCreator.m
-#import "RemoteUserCreator.h"
+// CreateUserCommand.m
+#import "CreateUserCommand.h"
 
-@implementation RemoteUserCreator {
+@implementation CreateUserCommand {
     NSString *username;
     NSString *password;
-    __weak id<RemoteUserCreatorDelegate> delegate;
+    __weak id<CreateUserCommandDelegate> delegate;
 }
 
-- (instancetype)initWithDelegate:(id<RemoteUserCreatorDelegate>)aDelegate
+- (instancetype)initWithDelegate:(id<CreateUserCommandDelegate>)aDelegate
 {
     self = [super init];
     if (self) {
@@ -66,7 +66,7 @@ you're interested in overriding.  Here's a sample implementation of an endpoint 
 }
 
 - (NSString *)path {
-    return @"users"
+    return @"users";
 }
 
 - (NSDictionary *)parameters {
@@ -74,7 +74,7 @@ you're interested in overriding.  Here's a sample implementation of an endpoint 
 }
 
 - (void)didCompleteWithSuccess:(id)json {
-    User *user = [User userWithDictionary:json];
+    User *user = [[User alloc] initWithDictionary:json];
     [delegate didCreateUser:user];
 }
 
@@ -88,5 +88,5 @@ you're interested in overriding.  Here's a sample implementation of an endpoint 
 Important Conventions
 =====================
 
-* The server can return a custom error message along with an error code by returning a json string in the body: {"errors": "[my message]"}
+* The server can return a custom error message along with an error code by returning a json string in the body: {"errors": "my error message"}
 * All successful responses are assumed to have JSON bodies
